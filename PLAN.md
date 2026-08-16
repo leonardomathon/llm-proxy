@@ -665,7 +665,7 @@ P2 Proxy core       P3 Pi extension
 
 # Phase 0 — Confirm external contracts
 
-### [ ] ORCH-00 — Verify current upstream APIs
+### [x] ORCH-00 — Verify current upstream APIs
 
 **Owner:** orchestrator.
 
@@ -690,7 +690,7 @@ Record any material deviation from this plan in an "Architecture deviations" sec
 
 # Phase 1 — Monorepo and quality toolchain
 
-### [ ] REPO-01 — Initialize pnpm workspace
+### [x] REPO-01 — Initialize pnpm workspace
 
 Create:
 
@@ -735,7 +735,7 @@ Avoid shell commands that only work on macOS if a portable pnpm command suffices
 
 ---
 
-### [ ] REPO-02 — Configure TypeScript
+### [x] REPO-02 — Configure TypeScript
 
 Use strict TypeScript.
 
@@ -764,7 +764,7 @@ Each package should extend the root base config.
 
 ---
 
-### [ ] REPO-03 — Configure Oxlint
+### [x] REPO-03 — Configure Oxlint
 
 Create root `oxlint.config.ts`.
 
@@ -789,7 +789,7 @@ Do not add hundreds of hand-selected style rules. Oxfmt owns formatting.
 
 ---
 
-### [ ] REPO-04 — Configure Oxfmt
+### [x] REPO-04 — Configure Oxfmt
 
 Create `.oxfmtrc.json` if configuration is needed.
 
@@ -814,7 +814,7 @@ Formatting must cover at least:
 
 ---
 
-### [ ] REPO-05 — Configure Vitest projects
+### [x] REPO-05 — Configure Vitest projects
 
 Use current Vitest `projects` configuration rather than deprecated workspace configuration.
 
@@ -835,7 +835,7 @@ Do not force all tests into one runtime.
 
 # Phase 2 — Hono proxy
 
-### [ ] PROXY-01 — Bootstrap Hono Worker
+### [x] PROXY-01 — Bootstrap Hono Worker
 
 Create the Hono Worker package under:
 
@@ -870,7 +870,7 @@ Configure Wrangler and generated Worker binding types according to current Cloud
 
 ---
 
-### [ ] PROXY-02 — Typed configuration and secret binding
+### [x] PROXY-02 — Typed configuration and secret binding
 
 Define Worker bindings for:
 
@@ -899,7 +899,7 @@ Never commit a real secret.
 
 ---
 
-### [ ] PROXY-03 — Proxy authentication middleware
+### [x] PROXY-03 — Proxy authentication middleware
 
 Implement authentication for `/api/v1/*`.
 
@@ -931,7 +931,7 @@ Do not add OAuth/JWT/session state.
 
 ---
 
-### [ ] PROXY-04 — Safe URL builder
+### [x] PROXY-04 — Safe URL builder
 
 Create a small pure function that maps an incoming proxy URL to the fixed upstream.
 
@@ -962,7 +962,7 @@ All valid mappings still target exactly `openrouter.ai`.
 
 ---
 
-### [ ] PROXY-05 — Request header sanitization
+### [x] PROXY-05 — Request header sanitization
 
 Implement a testable header transformation.
 
@@ -1004,7 +1004,7 @@ using the server-side Worker secret.
 
 ---
 
-### [ ] PROXY-06 — Forwarder
+### [x] PROXY-06 — Forwarder
 
 Implement the forwarding function.
 
@@ -1036,7 +1036,7 @@ Do not use a generic proxy target from request input.
 
 ---
 
-### [ ] PROXY-07 — Route composition and method restriction
+### [x] PROXY-07 — Route composition and method restriction
 
 Wire:
 
@@ -1064,7 +1064,7 @@ Authenticate before invoking the forwarder.
 
 ---
 
-### [ ] PROXY-08 — Safe operational logging
+### [x] PROXY-08 — Safe operational logging
 
 Add only if useful.
 
@@ -1091,7 +1091,7 @@ If Cloudflare already provides sufficient request logs and application logging a
 
 # Phase 3 — Pi package
 
-### [ ] PI-01 — Create `pi-openrouter-proxy` package manifest
+### [x] PI-01 — Create `pi-openrouter-proxy` package manifest
 
 Package directory:
 
@@ -1124,7 +1124,7 @@ Pi core packages imported by the extension must follow Pi's current peer-depende
 
 ---
 
-### [ ] PI-02 — Implement provider override
+### [x] PI-02 — Implement provider override
 
 Implementation should remain intentionally small.
 
@@ -1184,7 +1184,7 @@ The exact Pi configuration mechanism (`apiKey`, `authHeader`, `headers`, or comp
 
 ---
 
-### [ ] PI-03 — Extension configuration validation
+### [x] PI-03 — Extension configuration validation
 
 Fail early with useful errors for invalid proxy configuration.
 
@@ -1209,7 +1209,7 @@ Consider allowing `http://localhost` only for local development/tests.
 
 ---
 
-### [ ] PI-04 — Local installation workflow
+### [x] PI-04 — Local installation workflow
 
 Document and verify current Pi local installation, for example:
 
@@ -1282,7 +1282,7 @@ Do not make tests call real OpenRouter by default. Real-network tests belong in 
 
 ## 8.2 Pure unit tests
 
-### [ ] TEST-U01 — URL builder
+### [x] TEST-U01 — URL builder
 
 Target: `proxy/url.ts`.
 
@@ -1301,7 +1301,7 @@ Cases:
 
 ---
 
-### [ ] TEST-U02 — Header sanitizer
+### [x] TEST-U02 — Header sanitizer
 
 Target: `proxy/headers.ts`.
 
@@ -1319,7 +1319,7 @@ Cases:
 
 ---
 
-### [ ] TEST-U03 — Auth middleware
+### [x] TEST-U03 — Auth middleware
 
 Cases:
 
@@ -1334,7 +1334,7 @@ Cases:
 
 ---
 
-### [ ] TEST-U04 — Config parsing
+### [x] TEST-U04 — Config parsing
 
 Cases:
 
@@ -1356,20 +1356,20 @@ Use the current recommended `cloudflareTest()`/`cloudflare:workers` APIs, not de
 
 Mock outbound `fetch` using the current supported mechanism (direct `globalThis.fetch` mocking or the current recommended request-mocking approach).
 
-### [ ] TEST-I01 — Health
+### [x] TEST-I01 — Health
 
 - 200.
 - stable JSON.
 - no auth required.
 - no outbound `fetch`.
 
-### [ ] TEST-I02 — Authentication before upstream
+### [x] TEST-I02 — Authentication before upstream
 
 - no token -> 401 and fetch call count 0;
 - wrong token -> 401 and fetch call count 0;
 - valid token -> outbound call occurs.
 
-### [ ] TEST-I03 — Request forwarding
+### [x] TEST-I03 — Request forwarding
 
 Use an outbound mock to inspect the generated `Request`.
 
@@ -1383,7 +1383,7 @@ Verify:
 - OpenRouter-specific attribution headers if supplied;
 - proxy token absent upstream.
 
-### [ ] TEST-I04 — Body fidelity
+### [x] TEST-I04 — Body fidelity
 
 Send representative bodies:
 
@@ -1396,7 +1396,7 @@ Upstream mock reads bytes and verifies content matches expected input.
 
 The production code itself must still avoid pre-buffering.
 
-### [ ] TEST-I05 — Response fidelity
+### [x] TEST-I05 — Response fidelity
 
 Upstream fixtures:
 
@@ -1412,7 +1412,7 @@ Verify status/body/relevant headers remain correct.
 
 Do not transform OpenRouter errors into proxy-specific 200 responses.
 
-### [ ] TEST-I06 — SSE streaming
+### [x] TEST-I06 — SSE streaming
 
 This is a release-critical test.
 
@@ -1442,7 +1442,7 @@ Also verify:
 - no concatenation/re-serialization;
 - stream errors propagate reasonably.
 
-### [ ] TEST-I07 — Cancellation/abort
+### [x] TEST-I07 — Cancellation/abort
 
 Where test runtime support permits:
 
@@ -1451,7 +1451,7 @@ Where test runtime support permits:
 
 Do not overengineer cancellation behavior if Cloudflare's runtime owns propagation, but add at least one regression test for the chosen implementation.
 
-### [ ] TEST-I08 — Security/routing
+### [x] TEST-I08 — Security/routing
 
 Verify:
 
@@ -1467,7 +1467,7 @@ Verify:
 
 ## 8.4 Pi extension contract tests
 
-### [ ] TEST-P01 — Registration contract
+### [x] TEST-P01 — Registration contract
 
 Mock/stub the minimum `ExtensionAPI` surface required.
 
@@ -1489,7 +1489,7 @@ Assert it does **not** define:
 - OpenRouter API key;
 - new provider name.
 
-### [ ] TEST-P02 — Configuration behavior
+### [x] TEST-P02 — Configuration behavior
 
 Test:
 
@@ -1500,7 +1500,7 @@ Test:
 - malformed URL;
 - token environment reference behavior.
 
-### [ ] TEST-P03 — No-OpenRouter-login model visibility contract
+### [x] TEST-P03 — No-OpenRouter-login model visibility contract
 
 This is a release-critical Pi integration test.
 
@@ -1529,7 +1529,7 @@ If current Pi requires its normal credential slot before models become visible, 
 
 The test must distinguish this from **Sign in with OpenRouter**, which directly invokes OpenRouter's PKCE flow and is not an acceptable dependency for blocked-network operation.
 
-### [ ] TEST-P04 — No direct `.ai` request during normal proxy setup/use
+### [x] TEST-P04 — No direct `.ai` request during normal proxy setup/use
 
 Instrument or mock networking where practical.
 
@@ -1541,7 +1541,7 @@ For the primary supported setup path, verify that:
 
 If Pi itself performs unavoidable direct model-catalog refreshes outside the extension's control, record the exact behavior as an architecture deviation and determine whether the proxy must cover it before release.
 
-### [ ] TEST-P05 — Package smoke test
+### [x] TEST-P05 — Package smoke test
 
 Use Pi itself in a controlled local/manual or CI-compatible smoke test if practical.
 
@@ -1561,13 +1561,13 @@ The orchestrator should decide whether a real Pi CLI smoke test is stable enough
 
 ## 8.5 Static and repository checks
 
-### [ ] TEST-S01 — Formatting
+### [x] TEST-S01 — Formatting
 
 ```text
 pnpm format:check
 ```
 
-### [ ] TEST-S02 — Lint
+### [x] TEST-S02 — Lint
 
 ```text
 pnpm lint
@@ -1575,7 +1575,7 @@ pnpm lint
 
 Includes type-aware Oxlint.
 
-### [ ] TEST-S03 — Typecheck
+### [x] TEST-S03 — Typecheck
 
 ```text
 pnpm typecheck
@@ -1583,13 +1583,13 @@ pnpm typecheck
 
 Uses explicit TypeScript checking.
 
-### [ ] TEST-S04 — Unit/integration tests
+### [x] TEST-S04 — Unit/integration tests
 
 ```text
 pnpm test
 ```
 
-### [ ] TEST-S05 — Wrangler validation/build
+### [x] TEST-S05 — Wrangler validation/build
 
 Run a non-deploying Worker build/dry-run command supported by the current Wrangler release.
 
@@ -1599,7 +1599,7 @@ Purpose:
 - catch missing imports;
 - catch Wrangler config problems.
 
-### [ ] TEST-S06 — Package integrity
+### [x] TEST-S06 — Package integrity
 
 Verify package metadata and lockfile.
 
@@ -1609,7 +1609,7 @@ Recommended checks:
 - package tarball contains expected Pi extension;
 - no `.dev.vars`, secrets, coverage output, or unrelated files enter package tarball.
 
-### [ ] TEST-S07 — Secret scanning sanity
+### [x] TEST-S07 — Secret scanning sanity
 
 At minimum use repository grep/check patterns in CI or a lightweight secret scanner if justified.
 
@@ -1659,7 +1659,7 @@ No test may be deleted merely to restore the coverage number.
 
 # Phase 5 — Deployment and infrastructure
 
-### [ ] INFRA-01 — Wrangler configuration
+### [x] INFRA-01 — Wrangler configuration
 
 Create production-ready `wrangler.jsonc`.
 
@@ -1691,7 +1691,7 @@ Do not invent domains in committed defaults if the repository is intended to be 
 
 ---
 
-### [ ] INFRA-02 — Secret setup script
+### [x] INFRA-02 — Secret setup script
 
 `scripts/configure-secrets.sh`
 
@@ -1707,7 +1707,7 @@ Do not embed secrets in shell history through command arguments if avoidable.
 
 ---
 
-### [ ] INFRA-03 — Deployment script
+### [x] INFRA-03 — Deployment script
 
 `scripts/deploy.sh`
 
@@ -1728,7 +1728,7 @@ Do not silently deploy production by default if the script can reasonably requir
 
 ---
 
-### [ ] INFRA-04 — Setup script
+### [x] INFRA-04 — Setup script
 
 `scripts/setup.sh`
 
@@ -1747,7 +1747,7 @@ Do not make the script modify unrelated system configuration.
 
 # Phase 6 — CI and documentation
 
-### [ ] CI-01 — GitHub Actions
+### [x] CI-01 — GitHub Actions
 
 On pull request and push to main:
 
@@ -1779,7 +1779,7 @@ If added:
 
 ---
 
-### [ ] DOC-01 — README
+### [x] DOC-01 — README
 
 README must explain:
 
@@ -1801,7 +1801,7 @@ Clearly state that v1 still uses HTTPS and does not add application-layer encryp
 
 ---
 
-### [ ] DOC-02 — SECURITY.md
+### [x] DOC-02 — SECURITY.md
 
 Document:
 
@@ -1819,7 +1819,7 @@ Also explain that the service may be used only where the user is authorized to u
 
 ---
 
-### [ ] DOC-03 — `.dev.vars.example`
+### [x] DOC-03 — `.dev.vars.example`
 
 Example only:
 
@@ -2077,7 +2077,7 @@ Do not attempt to defeat controls beyond the intended hostname proxy behavior.
 
 Treat these as release gates.
 
-### [ ] SEC-01 — No open proxy
+### [x] SEC-01 — No open proxy
 
 Attempt to manipulate:
 
@@ -2094,7 +2094,7 @@ All outbound requests must still target:
 https://openrouter.ai
 ```
 
-### [ ] SEC-02 — Proxy secret isolation
+### [x] SEC-02 — Proxy secret isolation
 
 Prove proxy token is:
 
@@ -2103,7 +2103,7 @@ Prove proxy token is:
 - never logged;
 - never returned in errors.
 
-### [ ] SEC-03 — OpenRouter credential isolation
+### [x] SEC-03 — OpenRouter credential isolation
 
 Prove the real `OPENROUTER_API_KEY`:
 
@@ -2114,11 +2114,11 @@ Prove the real `OPENROUTER_API_KEY`:
 - is never logged;
 - is never echoed in errors.
 
-### [ ] SEC-04 — No request/response body logging
+### [x] SEC-04 — No request/response body logging
 
 Search code and exercise error paths.
 
-### [ ] SEC-05 — Repository secrets
+### [x] SEC-05 — Repository secrets
 
 Before release:
 
@@ -2132,7 +2132,7 @@ Verify no actual credentials were ever committed.
 
 If a secret was committed even briefly, rotate it rather than relying only on deleting the line.
 
-### [ ] SEC-06 — Dependency review
+### [x] SEC-06 — Dependency review
 
 Review direct runtime dependencies.
 
@@ -2152,15 +2152,15 @@ Reject dependencies that:
 
 Do not prematurely benchmark microseconds. Focus on properties that matter for an LLM proxy.
 
-### [ ] PERF-01 — No intentional response buffering
+### [x] PERF-01 — No intentional response buffering
 
 Code review + streaming integration test.
 
-### [ ] PERF-02 — No intentional request buffering
+### [x] PERF-02 — No intentional request buffering
 
 Code review + body fidelity test.
 
-### [ ] PERF-03 — Large-enough request smoke test
+### [x] PERF-03 — Large-enough request smoke test
 
 Send a reasonably large synthetic JSON body without costly model execution, preferably against an outbound mock.
 
@@ -2172,7 +2172,7 @@ Automated or staging test with several simultaneous mocked/cheap requests.
 
 Verify no global request-scoped mutable state.
 
-### [ ] PERF-05 — Upstream timeout/failure behavior
+### [x] PERF-05 — Upstream timeout/failure behavior
 
 Simulate network failure/throw from outbound `fetch`.
 

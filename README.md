@@ -82,6 +82,8 @@ pnpm install --frozen-lockfile
    curl -i http://localhost:8787/api/v1/models        # -> 401 without token
    curl -i http://localhost:8787/api/v1/models \
      -H "Authorization: Bearer <your proxy token>"    # -> proxied to OpenRouter
+   curl -i http://localhost:8787/models \
+     -H "Authorization: Bearer <your proxy token>"    # -> server-rendered model browser
    ```
 
    Use `curl -N` for streaming endpoints.
@@ -99,6 +101,15 @@ The proxy token is a random secret you generate. The real OpenRouter key is
 stored only as a Cloudflare Worker secret and is injected server-side; Pi never
 sees it and the client `Authorization` header is always discarded before
 forwarding.
+
+## Model browser
+
+`GET /models` renders a compact, server-rendered HTML table of OpenRouter
+models (search / sort / provider filter via vanilla JS), including Artificial
+Analysis intelligence/coding/agentic indices. It requires the same
+`Authorization: Bearer <proxy token>` as `/api/v1/*`, fetches model metadata
+server-side with `OPENROUTER_API_KEY`, and caches the data for 15 minutes. The
+key never reaches the browser.
 
 ## Deploying to Cloudflare
 

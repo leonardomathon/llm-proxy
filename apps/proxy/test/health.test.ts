@@ -11,7 +11,11 @@ const testEnv = {
 describe("healthz", () => {
   it("returns 200 ok without auth and without outbound fetch", async () => {
     const ctx = createExecutionContext();
-    const response = await app.fetch(new Request("https://proxy.example.com/healthz"), testEnv, ctx);
+    const response = await app.fetch(
+      new Request("https://proxy.example.com/healthz"),
+      testEnv,
+      ctx,
+    );
     await waitOnExecutionContext(ctx);
     expect(response.status).toBe(200);
     expect(await response.json()).toEqual({ status: "ok" });

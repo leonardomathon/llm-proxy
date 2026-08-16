@@ -2,7 +2,7 @@
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "openrouter-proxy",
   "main": "src/index.ts",
-  "compatibility_date": "2026-08-16"
+  "compatibility_date": "2026-08-16",
   // Attach a custom domain in production (see README / SECURITY.md):
   //   "routes": [{ "pattern": "proxy.example.com", "custom_domain": true }]
 }

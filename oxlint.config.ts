@@ -12,4 +12,15 @@ export default defineConfig({
   rules: {
     "typescript/no-floating-promises": "error",
   },
+  overrides: [
+    {
+      // Test mocks idiomatically cast partial/stub objects to the interfaces they
+      // stand in for. Type-aware assertion rules are too strict for that pattern.
+      files: ["**/*.test.ts"],
+      rules: {
+        "typescript/no-unsafe-type-assertion": "off",
+        "typescript/no-unnecessary-type-assertion": "off",
+      },
+    },
+  ],
 });

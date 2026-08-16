@@ -43,6 +43,7 @@ https://openrouter.ai/api/v1/*
 ```text
 apps/proxy/                     Hono Worker (the proxy)
 packages/pi-openrouter-proxy/   Pi extension (provider override)
+packages/opencode-openrouter-proxy/  OpenCode config (docs only)
 scripts/                        setup / deploy / secret-management
 .github/workflows/ci.yml        CI
 ```

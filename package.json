@@ -12,7 +12,8 @@
     "test": "vitest run",
     "test:unit": "vitest run --project pi-extension",
     "test:integration": "vitest run --project proxy-worker",
-    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",
+    "validate:opencode": "node scripts/validate-opencode.mjs",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test && pnpm validate:opencode",
     "dev": "pnpm --filter @openrouter-proxy/proxy dev",
     "deploy": "pnpm --filter @openrouter-proxy/proxy deploy"
   },

@@ -43,3 +43,6 @@ jobs:
 
       - name: Package smoke check
         run: pnpm --filter pi-openrouter-proxy pack --pack-destination /tmp
+
+      - name: Validate OpenCode config
+        run: pnpm validate:opencode

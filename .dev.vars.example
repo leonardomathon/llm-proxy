@@ -1,0 +1,5 @@
+# Local development secrets for the proxy Worker.
+# Copy to `apps/proxy/.dev.vars` (gitignored) and fill in real values.
+# NEVER commit a real secret.
+OPENROUTER_PROXY_TOKEN=replace-with-a-long-random-token
+OPENROUTER_API_KEY=replace-with-your-openrouter-key

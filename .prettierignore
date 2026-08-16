@@ -1,0 +1,6 @@
+pnpm-lock.yaml
+PLAN.md
+dist/
+coverage/
+.wrangler/
+node_modules/

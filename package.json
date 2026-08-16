@@ -1,0 +1,33 @@
+{
+  "name": "openrouter-proxy",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint --deny-warnings --report-unused-disable-directives .",
+    "lint:fix": "oxlint --fix .",
+    "typecheck": "pnpm -r typecheck",
+    "test": "vitest run",
+    "test:unit": "vitest run --project pi-extension",
+    "test:integration": "vitest run --project proxy-worker",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",
+    "dev": "pnpm --filter @openrouter-proxy/proxy dev",
+    "deploy": "pnpm --filter @openrouter-proxy/proxy deploy"
+  },
+  "devDependencies": {
+    "@cloudflare/vitest-pool-workers": "0.21.3",
+    "@cloudflare/workers-types": "5.20260816.1",
+    "@types/node": "26.2.0",
+    "oxfmt": "0.63.0",
+    "oxlint": "1.78.0",
+    "oxlint-tsgolint": "7.0.2001",
+    "typescript": "5.9.3",
+    "vitest": "4.1.10"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.20.0"
+}

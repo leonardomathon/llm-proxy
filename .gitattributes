@@ -1,0 +1,9 @@
+# Enforce LF line endings so shell scripts and CI run identically everywhere.
+* text=auto eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary

@@ -163,6 +163,66 @@ only for local development.
 > **not** required. This extension marks the built-in provider as configured
 > using the proxy token, so normal use never needs the PKCE flow.
 
+### Corporate VPNs and TLS inspection
+
+A browser successfully loading `/models` does not prove that Pi can connect.
+The browser uses the operating-system trust store, while Pi runs on Node.js,
+which may use its bundled CA store. A corporate VPN or HTTPS inspection gateway
+can therefore produce this Pi/Node error even though the page works:
+
+```text
+UNABLE_TO_GET_ISSUER_CERT_LOCALLY
+unable to get local issuer certificate
+```
+
+Test from the same terminal that launches Pi:
+
+```powershell
+node -e "fetch(new URL('/healthz', process.env.OPENROUTER_PROXY_URL)).then(r => console.log(r.status)).catch(e => console.error(e.cause ?? e))"
+```
+
+On a recent Node.js version, opt into the Windows/system certificate store and
+repeat the probe:
+
+```powershell
+node --help | Select-String "use-system-ca"
+$env:NODE_OPTIONS = "--use-system-ca"
+```
+
+If `--use-system-ca` is unavailable, obtain the corporate root certificate from
+your IT/security team in PEM (Base-64 X.509) format and extend Node's CA set:
+
+```powershell
+$env:NODE_EXTRA_CA_CERTS = "C:\Certificates\corporate-root.pem"
+```
+
+Set either variable **before** starting Pi, then launch Pi from that terminal.
+`NODE_EXTRA_CA_CERTS` is read only when the Node process starts. Do not use
+`NODE_TLS_REJECT_UNAUTHORIZED=0`; it disables certificate verification and can
+expose the proxy credential and prompt contents to active interception.
+
+The same CA configuration applies to other Node-based harnesses, including OMP
+and DeepSeek Harness. See [PLAN-HARNESSES.md](./PLAN-HARNESSES.md) for the
+planned client integrations and verification matrix.
+
+## Other agent harnesses
+
+The Worker data plane is not Pi-specific: it accepts an OpenRouter-compatible
+Bearer-authenticated base URL at `https://proxy.example.com/api/v1`. A harness
+can use it when it supports all of the following:
+
+- overriding the provider base URL;
+- sending `Authorization: Bearer <OPENROUTER_PROXY_TOKEN>`;
+- OpenAI-compatible chat completions and SSE streaming;
+- OpenRouter model IDs and compatibility metadata.
+
+Prefer overriding a harness's built-in `openrouter` provider when possible.
+That preserves its catalog, reasoning behavior, tool-call compatibility, and
+model capabilities. A generic custom OpenAI provider is a fallback because it
+usually requires copying model metadata and compatibility settings. Concrete
+OMP and DeepSeek Harness designs are specified in
+[PLAN-HARNESSES.md](./PLAN-HARNESSES.md).
+
 ## Quality gates
 
 ```bash
